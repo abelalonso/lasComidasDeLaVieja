@@ -15,7 +15,7 @@ authRoutes.get("/login", (req, res, next) => {
 });
 
 authRoutes.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/auth/profile",
   failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
@@ -30,7 +30,7 @@ authRoutes.post("/signup", upload.single('photo'), (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
-  const path = req.file.path;
+  const path = `upload/profilePic/${req.file.filename}`;
   const originalName = req.file.originalname;
   
   if (username === "" || password === "") {
@@ -46,13 +46,15 @@ authRoutes.post("/signup", upload.single('photo'), (req, res, next) => {
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
-
+    console.log(path)
     const newUser = new User({
       username,
       password: hashPass,
       email,
       profilePic: {path,originalName}
+      
     });
+  
 
     newUser.save((err) => {
       if (err) {
@@ -68,5 +70,10 @@ authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+//creamos la ruta del profile
+authRoutes.get("/profile", (req,res,next)=>{
+  console.log(req.user)
+  res.render("auth/profile", {user:req.user})
+})
 
 module.exports = authRoutes;
