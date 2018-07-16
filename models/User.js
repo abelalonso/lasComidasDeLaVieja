@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
-
+const pictureSchema = new Schema({
+  path: String,
+  originalName: String
+})
 const userSchema = new Schema({
-  username: String,
-  password: String
+  username: {type:String,unique:true},
+  password: String,
+  email:  {type:String,unique:true},
+  profilePic: pictureSchema
 }, {
   timestamps: {
     createdAt: 'created_at',

@@ -2,6 +2,8 @@ const express = require("express");
 const passport = require('passport');
 const authRoutes = express.Router();
 const User = require("../models/User");
+const multer = require("multer");
+const upload = multer({ dest: './public/upload/profilePic' });
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -23,10 +25,14 @@ authRoutes.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-authRoutes.post("/signup", (req, res, next) => {
+authRoutes.post("/signup", upload.single('photo'), (req, res, next) => {
+  console.log(req.file)
   const username = req.body.username;
   const password = req.body.password;
-  const rol = req.body.role;
+  const email = req.body.email;
+  const path = req.file.path;
+  const originalName = req.file.originalname;
+  
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
@@ -44,7 +50,8 @@ authRoutes.post("/signup", (req, res, next) => {
     const newUser = new User({
       username,
       password: hashPass,
-      role:"teacher"
+      email,
+      profilePic: {path,originalName}
     });
 
     newUser.save((err) => {
