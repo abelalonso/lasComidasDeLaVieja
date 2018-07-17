@@ -1,8 +1,29 @@
+.comment {
+  display: flex;
+  justify-content: flex-start;
+  padding: 15px 50px; }
+  .comment .comment-photo {
+    width: 75px; }
+  .comment .comment-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px; }
+
+.recipe-photo {
+  width: 150px; }
+
+.recipe-big-photo {
+  width: 300px; }
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
+
+img {
+  max-width: 100%;
+  object-fit: cover; }
 
 /*# sourceMappingURL=style.css.map */

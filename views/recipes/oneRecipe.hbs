@@ -1,4 +1,45 @@
-<h1>{{name}} <span>por {{authorId.username}}</span></h1>
-<div id="photo"></div>
-<div id="ingredients"></div>
-<div id="steps"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div id="photo">
+        <div class="recipe-big-photo">
+          <img src="../../{{recipe.recipePic.path}}" alt="{{recipe.recipePic.originalName}}">
+        </div>
+      </div>
+      <div id="rate"></div>
+      <div id="ingredients">
+        <h3>Ingredientes</h3>
+        <ul>
+          {{#each recipe.ingredients}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h1>{{recipe.name}} <span>por {{recipe.authorId.username}}</span></h1>
+      <div id="steps">
+        <h3>Pasos a seguir</h3>
+        <ol>
+          {{#each recipe.steps}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ol>
+      </div>
+      <div id="comments">
+        <h3>Comentarios</h3>
+        {{#each comments}}
+          {{> commentsPartial this}}
+        {{/each}}
+        <form action="/recipes/newComment" method="post">
+          <textarea name="message" rows="4" placeholder="Deja tu comentario"></textarea>
+          <button type="submit">Comentar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

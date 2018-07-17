@@ -2,6 +2,7 @@ const express = require ('express');
 const passport = require ('passport');
 const recipeRoutes = express.Router();
 const Recipe = require('../models/Recipe');
+const Comment = require('../models/Comment');
 const multer = require('multer');
 const upload = multer({dest: './public/upload/recipePic'});
 
@@ -58,8 +59,12 @@ recipeRoutes.get('/oneRecipe/:id', (req, res, next) => {
   Recipe.findById(req.params.id)
     .populate('authorId', 'username')
     .then((recipe) =>{
-      console.log(recipe)
-      res.render('recipes/oneRecipe', recipe);
+      Comment.find({recipeId: recipe._id})
+        .populate('authorId')
+        .then((comments) => {
+          res.render('recipes/oneRecipe', {recipe, comments});
+        })
+
     })
 })
 
