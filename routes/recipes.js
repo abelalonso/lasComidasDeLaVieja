@@ -14,13 +14,16 @@ recipeRoutes.post('/add', upload.single('photo'), (req, res, next) => {
   const {name, elaborationTime, category, } = req.body;
   const ingredients = [];
   const ingredient = req.body.ingredient;
+  if (ingredient[ingredient.length-1] ==""){ingredient.pop()}
   const quantity = req.body.quantity;
+  if (quantity[quantity.length-1] ==""){quantity.pop()}
   const steps = req.body.step;
+  if (steps[steps.length-1] ==""){steps.pop()}
   const keywords = req.body.keyword;
+  if (keywords[keywords.length-1] ==""){keywords.pop()}
   for (let i=0; i<ingredient.length; i++){
     ingredients.push(quantity[i]+' '+ingredient[i]);
   }
-  const userId = req.user.name;
   const path = `upload/recipePic/${req.file.filename}`;
   const originalName = req.file.originalname;
   newRecipe = new Recipe({
@@ -30,7 +33,7 @@ recipeRoutes.post('/add', upload.single('photo'), (req, res, next) => {
     elaborationTime,
     category,
     keywords,
-    authorId: req.user.name,
+    authorId: req.user._id,
     recipePic: {path, originalName}
   });
   newRecipe.save()

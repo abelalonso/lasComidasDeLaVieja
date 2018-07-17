@@ -70,9 +70,10 @@ authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
 //creamos la ruta del profile
 authRoutes.get("/profile", (req,res,next)=>{
-  console.log(req.user)
+  
   res.render("auth/profile", {user:req.user})
 })
 
