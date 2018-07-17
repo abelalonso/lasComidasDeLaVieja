@@ -3,7 +3,7 @@ const passport = require ('passport');
 const recipeRoutes = express.Router();
 const Recipe = require('../models/Recipe');
 const multer = require('multer');
-const upload = multer({dest: '.public/upload/recipePic'});
+const upload = multer({dest: './public/upload/recipePic'});
 
 recipeRoutes.get('/add', (req, res, next) => {
   res.render('recipes/new');
@@ -36,12 +36,14 @@ recipeRoutes.post('/add', upload.single('photo'), (req, res, next) => {
     authorId: req.user._id,
     recipePic: {path, originalName}
   });
+  console.log(newRecipe)
   newRecipe.save()
     .then(()=>{
       res.redirect("/auth/profile")
     })
     .catch((err)=>{
-      res.render('recipes/add', {message: "something went wrong"})
+      console.log(err);
+      res.render('recipes/new', {message: "something went wrong"})
     })
 });
 
