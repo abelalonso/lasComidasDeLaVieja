@@ -14,16 +14,21 @@ recipeRoutes.post('/add', upload.single('photo'), (req, res, next) => {
   const {name, elaborationTime, category, } = req.body;
   const ingredients = [];
   const ingredient = req.body.ingredient;
-  if (ingredient[ingredient.length-1] ==""){ingredient.pop()}
   const quantity = req.body.quantity;
-  if (quantity[quantity.length-1] ==""){quantity.pop()}
-  const steps = req.body.step;
-  if (steps[steps.length-1] ==""){steps.pop()}
-  const keywords = req.body.keyword;
-  if (keywords[keywords.length-1] ==""){keywords.pop()}
-  for (let i=0; i<ingredient.length; i++){
-    ingredients.push(quantity[i]+' '+ingredient[i]);
+  if (typeof ingredient == Object){
+    console.log(ingredient);
+    ingredient.filter((e)=>e!="");
+    quantity.filter((e)=>e!="");
+    for (let i=0; i<ingredient.length; i++){
+      ingredients.push(quantity[i]+' '+ingredient[i]);
+    }
+  }else{
+    ingredients.push(quantity+' '+ingredient);
   }
+  const steps = req.body.step;
+  if (typeof steps == Object){steps.filter((e)=>e!="");}
+  const keywords = req.body.keyword;
+  if (typeof keywords == Object){keywords.filter((e)=>e!="");}
   const path = `upload/recipePic/${req.file.filename}`;
   const originalName = req.file.originalname;
   newRecipe = new Recipe({
@@ -46,5 +51,16 @@ recipeRoutes.post('/add', upload.single('photo'), (req, res, next) => {
       res.render('recipes/new', {message: "something went wrong"})
     })
 });
+
+
+recipeRoutes.get('/oneRecipe/:id', (req, res, next) => {
+
+  Recipe.findById(req.params.id)
+    .populate('authorId', 'username')
+    .then((recipe) =>{
+      console.log(recipe)
+      res.render('recipes/oneRecipe', recipe);
+    })
+})
 
 module.exports = recipeRoutes;
