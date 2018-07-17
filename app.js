@@ -13,6 +13,7 @@ const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash = require("connect-flash");
 
+hbs.registerPartials(__dirname + '/views/partials');
 
 mongoose.Promise = Promise;
 mongoose

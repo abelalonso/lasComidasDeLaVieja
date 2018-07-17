@@ -1,6 +1,15 @@
 <div class="container">
     <h1>Hola {{user.username}}</h1>
-    <div class="col-md-3">
-        <img src="../{{user.profilePic.path}}" alt="{{user.profilePic.originalName}}">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="../{{user.profilePic.path}}" alt="{{user.profilePic.originalName}}" style="width: 150px">
+            <a href="/recipes/add">Crear receta</a>
+        </div>
+        <div class="col-md-9">
+            <h2>Todas mis recetas</h2>
+        {{#each recipes}}
+            <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
+        {{/each}} 
+        </div>
     </div>
 </div>

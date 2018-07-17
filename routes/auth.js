@@ -4,6 +4,7 @@ const authRoutes = express.Router();
 const User = require("../models/User");
 const multer = require("multer");
 const upload = multer({ dest: './public/upload/profilePic' });
+const Recipes = require('../models/Recipe');
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -26,7 +27,6 @@ authRoutes.get("/signup", (req, res, next) => {
 });
 
 authRoutes.post("/signup", upload.single('photo'), (req, res, next) => {
-  console.log(req.file)
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
@@ -52,7 +52,6 @@ authRoutes.post("/signup", upload.single('photo'), (req, res, next) => {
       password: hashPass,
       email,
       profilePic: {path,originalName}
-      
     });
   
 
@@ -70,10 +69,17 @@ authRoutes.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
 //creamos la ruta del profile
 authRoutes.get("/profile", (req,res,next)=>{
-  console.log(req.user)
-  res.render("auth/profile", {user:req.user})
+  Recipes.find({authorId: req.user._id})
+    .then((recipes) => {
+      console.log(recipes);
+      res.render("auth/profile", {user:req.user, recipes})
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 })
 
 module.exports = authRoutes;

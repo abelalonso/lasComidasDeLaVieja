@@ -9,7 +9,6 @@ mongoose.connect(dburl,{useMongoClient: true});
 
 User.findOne({username:"Admin"})
 .then((user)=>{
-    console.log(user._id)
     userId = user._id; 
     const recipes = [
         {

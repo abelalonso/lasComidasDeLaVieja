@@ -10,7 +10,6 @@ mongoose.connect(dburl,{useMongoClient: true});
 
 User.findOne({username:"abel"})
 .then((user)=>{
-    console.log(user._id)
     userId = user._id; 
     Recipe.findOne({name:"CALAMARES EN SU TINTA"})
         .then((recipe)=>{
