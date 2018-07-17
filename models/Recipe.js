@@ -13,7 +13,6 @@ const recipeSchema = new Schema({
   ingredients: [String],
   steps: [String],
   rate: [Number],
-  comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
   elaborationTime: String,
   category: {type: String, enum:["Entrante", "Principal", "Primero", "Postre", "Bebida"]},
   keywords: [String],

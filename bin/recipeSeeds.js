@@ -36,7 +36,6 @@ User.findOne({username:"Admin"})
                 "Compruebe que los calamares estén tiernos, de no ser así puede programar unos minutos más a la misma velocidad y temperatura."
         ],
             rate: [5,3,6],
-            comments: [],
             elaborationTime: "1h 20min",
             category: "Principal",
             keywords: ["calamares"],
