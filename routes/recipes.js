@@ -104,7 +104,7 @@ recipeRoutes.post("/search", (req,res,next)=>{
   Recipe.find({$or: [{keywords: [req.body.search]}, {name: new RegExp(req.body.search.toUpperCase())}]})
     .then((recipes) => {
       console.log(recipes)
-      res.render("auth/profile", {user:req.user, recipes})
+      res.render("index", {user:req.user, recipes})
     })
     .catch((err) => {
       console.log(err);

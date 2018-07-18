@@ -9,10 +9,6 @@
         </div>
         <div id="all-recipes" class="col-md-9">
             <h2>Todas mis recetas</h2>
-            <form action="/recipes/search" method="post">
-                <input type="text" name="search" placeholder="Palabra a buscar">
-                <button type="submit">Buscar</button>
-            </form>
             {{#each recipes}}
                 <div class="recipe-small col-md-4">
                     <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>

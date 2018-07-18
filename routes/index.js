@@ -13,4 +13,15 @@ router.get('/', (req, res, next) => {
   })
 });
 
+router.post('/', (req, res, next) => {
+  Recipe.find()
+  .then((recipes)=>{
+    console.log(recipes)
+    res.render('index',{recipes});
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+});
+
 module.exports = router;
