@@ -1,4 +1,3 @@
-require('dotenv').load();
 require("dotenv").config();
 const User = require("../models/User");
 const mongoose = require("mongoose");
@@ -17,7 +16,7 @@ const users = [
     email: "admin@gmail.com",
     active: true,
     profilePic: {
-        path: "upload/profilePic/mario.jpg",
+        path: "https://res.cloudinary.com/du4kngmkp/image/upload/v1531934243/lascomidasdelavieja/mario.jpg",
         originalName:"foto1.jpg"
     }
 },
@@ -28,7 +27,7 @@ const users = [
     email: "pepe@gmail.com",
     active: true,
     profilePic: {
-        path: "upload/profilePic/rana.jpg",
+        path: "https://res.cloudinary.com/du4kngmkp/image/upload/v1531934244/lascomidasdelavieja/rana.jpg",
         originalName:"foto2.jpg"
     }
 },
@@ -38,7 +37,7 @@ const users = [
     email: "abel@gmail.com",
     active: true,
     profilePic: {
-        path: "upload/profilePic/gato.jpg",
+        path: "https://res.cloudinary.com/du4kngmkp/image/upload/v1531934243/lascomidasdelavieja/gato.jpg",
         originalName:"foto2.jpg"
     }
 },

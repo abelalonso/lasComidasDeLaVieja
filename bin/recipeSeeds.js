@@ -48,7 +48,7 @@ User.findOne({
                     keywords: ["calamares"],
         //            recipeBeers,
                     recipePic: {
-                        path: "upload/recipePic/calamares.jpg",
+                        path: "https://res.cloudinary.com/du4kngmkp/image/upload/v1531934251/lascomidasdelavieja/calamares.jpg",
                         originalName: "foto1.jpg"
                     }
                 }]
