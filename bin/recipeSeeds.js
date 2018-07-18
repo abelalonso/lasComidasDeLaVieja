@@ -3,6 +3,7 @@ const User = require("../models/User");
 const Recipe = require("../models/Recipe")
 const mongoose = require("mongoose");
 const dburl = process.env.DBURL;
+const axios = require('axios');
 var userId = null;
 
 mongoose.connect(dburl, {
@@ -14,8 +15,10 @@ User.findOne({
     })
     .then((user) => {
         userId = user._id;
-        axios.get('https://api.punkapi.com/v2/beers/random')
+/*         axios.get('https://api.punkapi.com/v2/beers/random')
             .then((beer) => {
+                recipeBeers = [];
+                recipeBeers.push(beer); */
                 const recipes = [{
                     name: "CALAMARES EN SU TINTA",
                     authorId: userId,
@@ -42,13 +45,13 @@ User.findOne({
                     elaborationTime: "1h 20min",
                     category: "Principal",
                     keywords: ["calamares"],
-                    recipeBeers: [beer],
+        //            recipeBeers,
                     recipePic: {
                         path: "upload/recipePic/calamares.jpg",
                         originalName: "foto1.jpg"
                     }
                 }]
-
+                console.log(recipes[0].recipeBeers)
                 Recipe.create(recipes)
                     .then((data) => {
                         console.log("Recipes inserted");
@@ -58,5 +61,11 @@ User.findOne({
                         console.log("Error inserting recipes");
                         mongoose.disconnect();
                     })
-            });
-    })
+            })
+            .catch((err) =>{
+                console.log(err)
+            })
+/*     })
+    .catch((err) =>{
+        console.log(err)
+    }) */
