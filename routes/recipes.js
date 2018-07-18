@@ -35,6 +35,14 @@ recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
   const originalName = req.file.originalname;
   axios.get('https://api.punkapi.com/v2/beers/random')
   .then((beer) =>{
+    createRecipes(beer);
+  })
+  .catch((err) =>{
+    createRecipe();
+    console.log(err);
+  })
+
+  function createRecipe(beer){
     const recipeBeers = [];
     recipeBeers.push(beer);
     newRecipe = new Recipe({
@@ -58,10 +66,8 @@ recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
         console.log(err);
         res.render('recipes/newRecipe', {message: "something went wrong"})
       })
-  })
-  .catch((err) =>{
-    console.log(err);
-  })
+ 
+  }
 });
 
 

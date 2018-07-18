@@ -15,12 +15,14 @@
           {{/each}}
         </ul>
       </div>
+      {{#if recipes.recipeBeers}}
       <div id="recomended-beers">
         <h3>Cervezas recomendadas con este plato</h3>
         {{#each recipe.recipeBeers}}
           {{> beerPartial this}}
         {{/each}}
-      </div>
+      </div>    
+      {{/if}}
     </div>
     <div class="col-md-8">
       <h1>{{recipe.name}} <span>por {{recipe.authorId.username}}</span></h1>
