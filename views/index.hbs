@@ -1,5 +1,12 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<p>Bienvenido 
+    {{#if user}}
+        {{user.username}}
+    {{/if}}
+    {{#unless user}}
+        invitado, para acceder a cada receta, debes estar registrado...
+    {{/unless}}
+    </p>
 <div id="all-recipes" class="col-md-9">
   <h2>Todas las recetas</h2>
   {{#each recipes}}
