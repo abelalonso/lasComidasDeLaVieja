@@ -1,5 +1,10 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
- {{#each recipes}}
-  <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
- {{/each}}
+<div id="all-recipes" class="col-md-9">
+  <h2>Todas las recetas</h2>
+  {{#each recipes}}
+  <div class="recipe-small col-md-4">
+    <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
+  </div>
+  {{/each}}
+</div>

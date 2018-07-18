@@ -6,8 +6,9 @@ const Comment = require('../models/Comment');
 const multer = require('multer');
 const upload = multer({dest: './public/upload/recipePic'});
 const axios = require('axios');
+const {ensureLoggedIn} = require('../middleware/ensureLogin');
 
-recipeRoutes.get('/addRecipe', (req, res, next) => {
+recipeRoutes.get('/addRecipe', ensureLoggedIn("/auth/informs"), (req, res, next) => {
   res.render('recipes/newRecipe');
 })
 
@@ -35,6 +36,14 @@ recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
   const originalName = req.file.originalname;
   axios.get('https://api.punkapi.com/v2/beers/random')
   .then((beer) =>{
+    createRecipes(beer);
+  })
+  .catch((err) =>{
+    createRecipe();
+    console.log(err);
+  })
+
+  function createRecipe(beer){
     const recipeBeers = [];
     recipeBeers.push(beer);
     newRecipe = new Recipe({
@@ -58,14 +67,11 @@ recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
         console.log(err);
         res.render('recipes/newRecipe', {message: "something went wrong"})
       })
-  })
-  .catch((err) =>{
-    console.log(err);
-  })
+ 
+  }
 });
 
-
-recipeRoutes.get('/oneRecipe/:id', (req, res, next) => {
+recipeRoutes.get('/oneRecipe/:id', ensureLoggedIn("/auth/informs"), (req, res, next) => {
   Recipe.findById(req.params.id)
     .populate('authorId', 'username')
     .then((recipe) =>{
@@ -92,8 +98,17 @@ recipeRoutes.post('/addComment/:id', (req, res, next) => {
     .catch((error) =>{
       console.log(error);
     })
-  
 })
 
-
+recipeRoutes.post("/search", (req,res,next)=>{
+  console.log(req.body.search);
+  Recipe.find({$or: [{keywords: [req.body.search]}, {name: new RegExp(req.body.search.toUpperCase())}]})
+    .then((recipes) => {
+      console.log(recipes)
+      res.render("index", {user:req.user, recipes})
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+});
 module.exports = recipeRoutes;

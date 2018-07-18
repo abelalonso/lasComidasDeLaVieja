@@ -5,6 +5,7 @@ const User = require("../models/User");
 const multer = require("multer");
 const upload = multer({ dest: './public/upload/profilePic' });
 const Recipes = require('../models/Recipe');
+const {ensureLoggedIn} = require('../middleware/ensureLogin');
 
 
 // Bcrypt to encrypt passwords
@@ -71,14 +72,18 @@ authRoutes.get("/logout", (req, res) => {
 });
 
 //creamos la ruta del profile
-authRoutes.get("/profile", (req,res,next)=>{
+authRoutes.get("/profile", ensureLoggedIn("/auth/informs"), (req,res,next)=>{
   Recipes.find({authorId: req.user._id})
     .then((recipes) => {
-      res.render("auth/profile", {user:req.user, recipes})
+      res.render("auth/profile", {recipes})
     })
     .catch((err) => {
       console.log(err);
     })
+});
+
+authRoutes.get("/informs", (req, res) => {
+  res.render("auth/informs");
 });
 
 module.exports = authRoutes;

@@ -27,6 +27,14 @@
       {{#unless user}}
         <li><a href="/auth/login">Iniciar sesión</a></li>
         <li><a href="/auth/signup">Registrarse</a></li>
+        {{#if recipes}}
+        <li>
+          <form action="/recipes/search" method="post">
+            <input type="text" name="search" placeholder="Palabra a buscar">
+            <button type="submit">Buscar</button>
+          </form>
+        </li>
+        {{/if}}
       {{/unless}}
     </ul>
   </div>

@@ -44,4 +44,14 @@ img {
   max-width: 100%;
   object-fit: cover; }
 
+.navbar {
+  display: flex;
+  justify-content: flex-end; }
+  .navbar li {
+    display: inline-block;
+    padding-right: 30px; }
+
+#text-no {
+  padding-top: 80px; }
+
 /*# sourceMappingURL=style.css.map */

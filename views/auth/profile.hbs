@@ -6,14 +6,15 @@
                 <img src="../{{user.profilePic.path}}" alt="{{user.profilePic.originalName}}">
             </div>
             <a href="/recipes/addRecipe">Crear receta</a>
+            <a href="/">Mostrar todas las recetas</a>
         </div>
         <div id="all-recipes" class="col-md-9">
             <h2>Todas mis recetas</h2>
-        {{#each recipes}}
-            <div class="recipe-small col-md-4">
-                <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
-            </div>
-        {{/each}} 
+            {{#each recipes}}
+                <div class="recipe-small col-md-4">
+                    <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
+                </div>
+            {{/each}} 
         </div>
     </div>
 </div>
