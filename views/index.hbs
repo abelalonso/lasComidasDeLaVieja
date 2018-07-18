@@ -1,2 +1,5 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+ {{#each recipes}}
+  <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
+ {{/each}}
