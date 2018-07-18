@@ -1,8 +1,47 @@
+.comment {
+  display: flex;
+  justify-content: flex-start;
+  padding: 15px 50px; }
+  .comment .comment-photo {
+    width: 75px; }
+  .comment .comment-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px; }
+
+.recipe-big-photo {
+  width: 300px; }
+
+.img-beer {
+  width: 70px; }
+
+#profile-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  #profile-section #profile-pic {
+    width: 200px; }
+
+#all-recipes .recipe-small a {
+  text-decoration: none; }
+  #all-recipes .recipe-small a .recipe-photo {
+    width: 150px; }
+  #all-recipes .recipe-small a .recipe {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  #all-recipes .recipe-small a h3 {
+    font-size: 1.2em; }
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
+
+img {
+  max-width: 100%;
+  object-fit: cover; }
 
 /*# sourceMappingURL=style.css.map */

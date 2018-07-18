@@ -2,21 +2,23 @@ const express = require ('express');
 const passport = require ('passport');
 const recipeRoutes = express.Router();
 const Recipe = require('../models/Recipe');
+const Comment = require('../models/Comment');
 const multer = require('multer');
 const upload = multer({dest: './public/upload/recipePic'});
+const axios = require('axios');
 
-recipeRoutes.get('/add', (req, res, next) => {
-  res.render('recipes/new');
+recipeRoutes.get('/addRecipe', (req, res, next) => {
+  res.render('recipes/newRecipe');
 })
 
 
-recipeRoutes.post('/add', upload.single('photo'), (req, res, next) => {
+recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
   const {name, elaborationTime, category, } = req.body;
   const ingredients = [];
   const ingredient = req.body.ingredient;
   const quantity = req.body.quantity;
   if (typeof ingredient == Object){
-    console.log(ingredient);
+
     ingredient.filter((e)=>e!="");
     quantity.filter((e)=>e!="");
     for (let i=0; i<ingredient.length; i++){
@@ -31,36 +33,67 @@ recipeRoutes.post('/add', upload.single('photo'), (req, res, next) => {
   if (typeof keywords == Object){keywords.filter((e)=>e!="");}
   const path = `upload/recipePic/${req.file.filename}`;
   const originalName = req.file.originalname;
-  newRecipe = new Recipe({
-    name,
-    ingredients,
-    steps,
-    elaborationTime,
-    category,
-    keywords,
-    authorId: req.user._id,
-    recipePic: {path, originalName}
-  });
-  console.log(newRecipe)
-  newRecipe.save()
-    .then(()=>{
-      res.redirect("/auth/profile")
+  axios.get('https://api.punkapi.com/v2/beers/random')
+  .then((beer) =>{
+    const recipeBeers = [];
+    recipeBeers.push(beer);
+    newRecipe = new Recipe({
+      name: name.toUpperCase(),
+      ingredients,
+      steps,
+      elaborationTime,
+      category,
+      keywords,
+      recipeBeers,
+      authorId: req.user._id,
+      recipePic: {path, originalName}
     })
-    .catch((err)=>{
-      console.log(err);
-      res.render('recipes/new', {message: "something went wrong"})
-    })
+
+    newRecipe.save()
+      .then(()=>{
+
+        res.redirect("/auth/profile")
+      })
+      .catch((err)=>{
+        console.log(err);
+        res.render('recipes/newRecipe', {message: "something went wrong"})
+      })
+  })
+  .catch((err) =>{
+    console.log(err);
+  })
 });
 
 
 recipeRoutes.get('/oneRecipe/:id', (req, res, next) => {
-
   Recipe.findById(req.params.id)
     .populate('authorId', 'username')
     .then((recipe) =>{
-      console.log(recipe)
-      res.render('recipes/oneRecipe', recipe);
+      Comment.find({recipeId: recipe._id})
+        .populate('authorId')
+        .then((comments) => {
+          res.render('recipes/oneRecipe', {user:req.user, recipe, comments});
+        })
     })
 })
+
+recipeRoutes.post('/addComment/:id', (req, res, next) => {
+
+  const authorId = req.user._id;
+  const content = req.body.message;
+  const recipeId = req.params.id;
+  const newComment = new Comment({authorId, content, recipeId});
+
+  newComment.save()
+    .then((comment)=>{
+      console.log("Comment inserted properly");
+      res.redirect(`/recipes/oneRecipe/${recipeId}`);
+    })
+    .catch((error) =>{
+      console.log(error);
+    })
+  
+})
+
 
 module.exports = recipeRoutes;

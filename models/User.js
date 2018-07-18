@@ -9,6 +9,7 @@ const userSchema = new Schema({
   password: String,
   email:  {type:String,unique:true},
   active: Boolean,
+  favoriteRecipes: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
   profilePic: pictureSchema
 }, {
   timestamps: {
