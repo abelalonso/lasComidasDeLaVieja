@@ -70,7 +70,6 @@ recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
   }
 });
 
-
 recipeRoutes.get('/oneRecipe/:id', (req, res, next) => {
   Recipe.findById(req.params.id)
     .populate('authorId', 'username')
@@ -98,8 +97,17 @@ recipeRoutes.post('/addComment/:id', (req, res, next) => {
     .catch((error) =>{
       console.log(error);
     })
-  
 })
 
-
+recipeRoutes.post("/search", (req,res,next)=>{
+  console.log(req.body.search);
+  Recipe.find({$or: [{keywords: [req.body.search]}, {name: new RegExp(req.body.search.toUpperCase())}]})
+    .then((recipes) => {
+      console.log(recipes)
+      res.render("auth/profile", {user:req.user, recipes})
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+});
 module.exports = recipeRoutes;
