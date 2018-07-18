@@ -6,8 +6,9 @@ const Comment = require('../models/Comment');
 const multer = require('multer');
 const upload = multer({dest: './public/upload/recipePic'});
 const axios = require('axios');
+const {ensureLoggedIn} = require('../middleware/ensureLogin');
 
-recipeRoutes.get('/addRecipe', (req, res, next) => {
+recipeRoutes.get('/addRecipe', ensureLoggedIn("/auth/informs"), (req, res, next) => {
   res.render('recipes/newRecipe');
 })
 
@@ -70,7 +71,7 @@ recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
   }
 });
 
-recipeRoutes.get('/oneRecipe/:id', (req, res, next) => {
+recipeRoutes.get('/oneRecipe/:id', ensureLoggedIn("/auth/informs"), (req, res, next) => {
   Recipe.findById(req.params.id)
     .populate('authorId', 'username')
     .then((recipe) =>{
