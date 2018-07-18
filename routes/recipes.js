@@ -3,8 +3,7 @@ const passport = require ('passport');
 const recipeRoutes = express.Router();
 const Recipe = require('../models/Recipe');
 const Comment = require('../models/Comment');
-const multer = require('multer');
-const upload = multer({dest: './public/upload/recipePic'});
+const uploadCloud = require('../config/cloudinary');
 const axios = require('axios');
 const {ensureLoggedIn} = require('../middleware/ensureLogin');
 
@@ -13,7 +12,7 @@ recipeRoutes.get('/addRecipe', ensureLoggedIn("/auth/informs"), (req, res, next)
 })
 
 
-recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
+recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) => {
   const {name, elaborationTime, category, } = req.body;
   const ingredients = [];
   const ingredient = req.body.ingredient;
@@ -32,8 +31,8 @@ recipeRoutes.post('/addRecipe', upload.single('photo'), (req, res, next) => {
   if (typeof steps == Object){steps.filter((e)=>e!="");}
   const keywords = req.body.keyword;
   if (typeof keywords == Object){keywords.filter((e)=>e!="");}
-  const path = `upload/recipePic/${req.file.filename}`;
-  const originalName = req.file.originalname;
+  const path = req.file.secure_url;
+  const originalName = req.file.original_name;
   axios.get('https://api.punkapi.com/v2/beers/random')
   .then((beer) =>{
     createRecipes(beer);

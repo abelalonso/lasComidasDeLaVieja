@@ -2,8 +2,8 @@ const express = require("express");
 const passport = require('passport');
 const authRoutes = express.Router();
 const User = require("../models/User");
-const multer = require("multer");
-const upload = multer({ dest: './public/upload/profilePic' });
+
+const uploadCloud = require('../config/cloudinary');
 const Recipes = require('../models/Recipe');
 const {ensureLoggedIn} = require('../middleware/ensureLogin');
 
@@ -28,12 +28,12 @@ authRoutes.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-authRoutes.post("/signup", upload.single('photo'), (req, res, next) => {
+authRoutes.post("/signup", uploadCloud.single('photo'), (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
-  const path = `upload/profilePic/${req.file.filename}`;
-  const originalName = req.file.originalname;
+  const path = req.file.secure_url;
+  const originalName = req.file.original_filename;
   
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
