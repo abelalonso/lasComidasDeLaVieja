@@ -6,6 +6,7 @@ const multer = require("multer");
 const upload = multer({ dest: './public/upload/profilePic' });
 const Recipes = require('../models/Recipe');
 
+
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -46,7 +47,6 @@ authRoutes.post("/signup", upload.single('photo'), (req, res, next) => {
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
-    console.log(path)
     const newUser = new User({
       username,
       password: hashPass,
@@ -74,12 +74,11 @@ authRoutes.get("/logout", (req, res) => {
 authRoutes.get("/profile", (req,res,next)=>{
   Recipes.find({authorId: req.user._id})
     .then((recipes) => {
-      console.log(recipes);
       res.render("auth/profile", {user:req.user, recipes})
     })
     .catch((err) => {
       console.log(err);
     })
-})
+});
 
 module.exports = authRoutes;

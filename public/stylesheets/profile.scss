@@ -1,0 +1,27 @@
+#profile-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  #profile-pic{
+    width:200px;
+  }
+}
+
+#all-recipes{
+  .recipe-small{
+    a{
+      text-decoration: none;
+      .recipe-photo{
+        width: 150px;
+      }
+      .recipe{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      h3{
+        font-size: 1.2em;
+      }
+    }
+  }
+}

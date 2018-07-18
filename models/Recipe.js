@@ -12,10 +12,10 @@ const recipeSchema = new Schema({
   authorId: {type: Schema.Types.ObjectId, ref: 'User'},
   ingredients: [String],
   steps: [String],
-  rate: [Number],
   elaborationTime: String,
   category: {type: String, enum:["Entrante", "Principal", "Primero", "Postre", "Bebida"]},
   keywords: [String],
+  recipeBeers: [],
   recipePic: pictureSchema
 }, {
   timestamps: {

@@ -14,12 +14,21 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script src="/javascripts/recipesForm.js"></script>
   <script src="/javascripts/script.js"></script>
+  
 </head>
 
 <body>
   <div class="navbar">
-    <a href="/auth/login">Login</a>
-    <a href="/auth/signup">Sign up</a>
+    <ul>
+      {{#if user}}
+        <li><a href="/auth/profile">Mi página</a></li>
+        <li><a href="/auth/logout">Salir</a></li>
+      {{/if}}
+      {{#unless user}}
+        <li><a href="/auth/login">Iniciar sesión</a></li>
+        <li><a href="/auth/signup">Registrarse</a></li>
+      {{/unless}}
+    </ul>
   </div>
 
   {{{body}}}

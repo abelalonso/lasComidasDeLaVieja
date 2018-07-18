@@ -15,6 +15,12 @@
           {{/each}}
         </ul>
       </div>
+      <div id="recomended-beers">
+        <h3>Cervezas recomendadas con este plato</h3>
+        {{#each recipe.recipeBeers}}
+          {{> beerPartial this}}
+        {{/each}}
+      </div>
     </div>
     <div class="col-md-8">
       <h1>{{recipe.name}} <span>por {{recipe.authorId.username}}</span></h1>
@@ -31,7 +37,7 @@
         {{#each comments}}
           {{> commentsPartial this}}
         {{/each}}
-        <form action="/recipes/newComment" method="post">
+        <form action="/recipes/addComment/{{recipe._id}}" method="post">
           <textarea name="message" rows="4" placeholder="Deja tu comentario"></textarea>
           <button type="submit">Comentar</button>
         </form>
