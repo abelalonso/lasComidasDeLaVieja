@@ -41,7 +41,6 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
   })
 
   function createRecipe(beer){
-    console.log(beer)
     const recipeBeers = [];
     recipeBeers.push(beer);
     newRecipe = new Recipe({
@@ -108,9 +107,22 @@ recipeRoutes.post("/search", (req,res,next)=>{
     .catch((err) => {
       console.log(err);
     })
-
-recipeRoutes.get("recipe/delete/:id",(req,res,next)=>{
-  Recipe.findByIdAndRemove(req.params.id,()=>res.redirect("recipes/oneRecipe"))
-})
 });
+
+recipeRoutes.get("/delete/:id", (req,res,next)=>{
+  console.log("hola")
+  Recipe.findByIdAndRemove(req.params.id)
+    .then(()=>{
+      res.redirect("/auth/profile")
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+})
+recipeRoutes.get("/edit/:id", (req,res,next)=>{
+  Recipe.findById(req.params.id)
+    .then((recipe)=>{
+      res.render("recipes/editRecipe", {recipe})
+    })
+})
 module.exports = recipeRoutes;

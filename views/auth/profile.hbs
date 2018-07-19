@@ -15,9 +15,12 @@
                     <div class="recipe-small">
                         <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
                         
-                      <a href="recipe/delete/{{this._id}}">
+                      <a href="/recipes/delete/{{this._id}}">
                       <button>Borrar</button>
                       </a>
+                      <a href="/recipes/edit/{{this._id}}">
+                          <button>Editar</button>
+                          </a>
                     </div>
                 {{/each}} 
             </div>
