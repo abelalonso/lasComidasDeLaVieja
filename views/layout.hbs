@@ -19,6 +19,12 @@
 
 <body>
   <div class="navbar">
+    <div id="logo">
+      <img src="/images/abuelaCocina.jpg">
+    </div>
+    <div id="title">
+      <img src="/images/texto.png">
+    </div>
     <ul>
       {{#if user}}
         <li><a href="/auth/profile">Mi página</a></li>
@@ -30,7 +36,7 @@
         {{#if recipes}}
         <li>
           <form action="/recipes/search" method="post">
-            <input type="text" name="search" placeholder="Palabra a buscar">
+            <input type="text" name="search" placeholder="Buscar receta">
             <button type="submit">Buscar</button>
           </form>
         </li>

@@ -65,10 +65,14 @@ img {
 
 .navbar {
   display: flex;
-  justify-content: flex-end; }
+  justify-content: space-between; }
+  .navbar #logo {
+    width: 200px;
+    margin: -50px 0 0 -80px; }
+  .navbar #title {
+    margin-top: -50px; }
   .navbar li {
-    display: inline-block;
-    padding-right: 30px; }
+    padding-right: 20px; }
 
 #text-no {
   padding-top: 80px; }
@@ -78,5 +82,8 @@ img {
   flex-wrap: nowrap; }
   #recipes .recipe-small {
     padding: 15px; }
+
+p {
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
