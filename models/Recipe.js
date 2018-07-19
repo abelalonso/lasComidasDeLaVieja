@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const pictureSchema = new Schema({
-  path: String,
-  originalName: String
-});
-
-
 const recipeSchema = new Schema({
   name: String,
   authorId: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -16,7 +10,10 @@ const recipeSchema = new Schema({
   category: {type: String, enum:["Entrante", "Principal", "Primero", "Postre", "Bebida"]},
   keywords: [String],
   recipeBeers: [],
-  recipePic: pictureSchema
+  recipePic: {
+    path: {type: String, default: "https://res.cloudinary.com/du4kngmkp/image/upload/v1531987691/lascomidasdelavieja/no-foto.png"},
+    originalName: {type: String, default: "Sin Foto"}
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',

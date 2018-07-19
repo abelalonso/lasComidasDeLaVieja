@@ -10,11 +10,13 @@
         </div>
         <div id="all-recipes" class="col-md-9">
             <h2>Todas mis recetas</h2>
-            {{#each recipes}}
-                <div class="recipe-small col-md-4">
-                    <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
-                </div>
-            {{/each}} 
+            <div id="recipes">
+                {{#each recipes}}
+                    <div class="recipe-small">
+                        <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
+                    </div>
+                {{/each}} 
+            </div>
         </div>
     </div>
 </div>

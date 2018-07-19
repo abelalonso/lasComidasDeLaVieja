@@ -31,8 +31,7 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
   if (typeof steps == Object){steps.filter((e)=>e!="");}
   const keywords = req.body.keyword;
   if (typeof keywords == Object){keywords.filter((e)=>e!="");}
-  const path = req.file.secure_url;
-  const originalName = req.file.original_name;
+
   axios.get('https://api.punkapi.com/v2/beers/random')
   .then((beer) =>{
     createRecipe(beer.data[0]);
@@ -55,8 +54,12 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
       keywords,
       recipeBeers,
       authorId: req.user._id,
-      recipePic: {path, originalName}
     })
+
+    if(req.file){
+      newRecipe.recipePic.path = req.file.secure_url;
+      newRecipe.recipePic.originalName = req.file.original_name;
+    }
 
     newRecipe.save()
       .then(()=>{

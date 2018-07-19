@@ -23,19 +23,28 @@
 #profile-section {
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: flex-start;
+  align-items: center; }
   #profile-section #profile-pic {
-    width: 200px; }
+    width: 200px;
+    height: 200px; }
+    #profile-section #profile-pic img {
+      border-radius: 100%;
+      border: 2px dashed gray; }
 
-#all-recipes .recipe-small a {
-  text-decoration: none; }
-  #all-recipes .recipe-small a .recipe-photo {
-    width: 150px; }
-  #all-recipes .recipe-small a .recipe {
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-  #all-recipes .recipe-small a h3 {
+#all-recipes #recipes {
+  display: flex;
+  flex-wrap: nowrap; }
+  #all-recipes #recipes a {
+    text-decoration: none; }
+    #all-recipes #recipes a .recipe-photo {
+      width: 150px; }
+    #all-recipes #recipes a .recipe {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px; }
+  #all-recipes #recipes h3 {
     font-size: 1.2em; }
 
 body {
@@ -58,5 +67,11 @@ img {
 
 #text-no {
   padding-top: 80px; }
+
+#recipes {
+  display: flex;
+  flex-wrap: nowrap; }
+  #recipes .recipe-small {
+    padding: 15px; }
 
 /*# sourceMappingURL=style.css.map */
