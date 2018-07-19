@@ -1,0 +1,53 @@
+ <form action="/recipes/addRecipe" method="POST" enctype="multipart/form-data">
+    <div class="recipe-name">
+      <h2 for="name">Introduce el nombre de la receta</h2>
+      <input name="name" value="{{recipe.name}}">
+    </div>
+    <div class="recipe-time">
+      <h2 for="elaborationTime">Tiempo de elaboración</h2>
+      <input name="elaborationTime" value="{{recipe.elaborationTime}}">
+    </div>
+    <div id="ingredients">
+      <h2 for="ingredients">Ingredientes</h2>
+            {{#each recipe.ingredients}}
+            <div class="ingredient">
+                <input id="ingredient" name="ingredient" type="text" value="{{this}}">
+            </div>
+            {{/each}}
+      <button id="addIngredientEdit">Add new ingredient</button>
+    </div>
+    <div id="steps">
+      <h2>Pasos</h2>
+    {{#each recipe.steps}}
+      <div class="step">
+        <textarea id="step" name="step" rows="5"> {{this}}</textarea>
+      </div>
+      {{/each}}
+      <button id="addStepEdit">Add</button>
+    </div>
+    <div id="category">
+      <h2>Categoría</h2>
+      <select name="category" >
+        <option>Entrante</option>            
+        <option>Primero</option>            
+        <option>Principal</option>
+        <option>Postre</option>
+        <option>Bebida</option>           
+      </select>
+    </div>
+    <div id="keywords">
+        <h2>Palabras clave</h2>
+        <div class="keyword">
+            {{#each recipe.keywords}}
+          <input id="keyword" name="keyword" type="text" value="{{this}}">
+            {{/each}}
+        </div>
+        <button id="addKeywordEdit">Add new keyword</button>
+    </div>
+    <div id="photo">
+      <h2>Foto de la receta</h2>
+       <input type="file" name="photo">
+    </div>
+    <button type="submit">Enviar</button>
+  </form>  
+</body>

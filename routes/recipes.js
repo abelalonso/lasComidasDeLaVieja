@@ -1,5 +1,4 @@
 const express = require ('express');
-const passport = require ('passport');
 const recipeRoutes = express.Router();
 const Recipe = require('../models/Recipe');
 const Comment = require('../models/Comment');
@@ -42,7 +41,6 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
   })
 
   function createRecipe(beer){
-    console.log(beer)
     const recipeBeers = [];
     recipeBeers.push(beer);
     newRecipe = new Recipe({
@@ -79,7 +77,7 @@ recipeRoutes.get('/oneRecipe/:id', ensureLoggedIn("/auth/informs"), (req, res, n
       Comment.find({recipeId: recipe._id})
         .populate('authorId')
         .then((comments) => {
-          res.render('recipes/oneRecipe', {user:req.user, recipe, comments});
+          res.render('recipes/oneRecipe', {recipe, comments});
         })
     })
 })
@@ -111,4 +109,21 @@ recipeRoutes.post("/search", (req,res,next)=>{
       console.log(err);
     })
 });
+
+recipeRoutes.get("/delete/:id", (req,res,next)=>{
+  console.log("hola")
+  Recipe.findByIdAndRemove(req.params.id)
+    .then(()=>{
+      res.redirect("/auth/profile")
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+})
+recipeRoutes.get("/edit/:id", (req,res,next)=>{
+  Recipe.findById(req.params.id)
+    .then((recipe)=>{
+      res.render("recipes/editRecipe", {recipe})
+    })
+})
 module.exports = recipeRoutes;

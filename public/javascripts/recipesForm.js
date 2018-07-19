@@ -36,12 +36,35 @@ window.onload = function(){
     ev.preventDefault();
     let inbox=$(`#keyword${counterKeyword-1}`).val();
     if (inbox !=""){
-/*       $(`#keyword${counterKeyword-1}`)
-        .replaceWith(`<label id="keyword${counterKeyword-1}"${inbox}</label>`);  */
+
       $(this).before(`<div class='keyword'>
                         <input id="keyword${counterKeyword++}" 
                         name="keyword" placeholder="Palabra Clave">
                       </div>`);
     }
+  });
+
+  $('#addIngredientEdit').click(function(ev) {
+    ev.preventDefault();
+    $(this).before(`<div class="ingredient">
+                      <input id="ingredient" name="ingredient" type="text" placeholder="Ingrediente">
+                    </div>`); 
+  });
+
+  $('#addStepEdit').click(function(ev) {
+    ev.preventDefault();
+    $(this).before(`<div class='step'>
+                      <textarea id="step" 
+                      name="step"
+                      placeholder="Nuevo paso" rows="5"></textarea>
+                    </div>`);
+  });
+
+  $('#keyword').click(function(ev) {
+    ev.preventDefault();
+    $(this).before(`<div class='keyword'>
+                      <input id="keyword" 
+                      name="keyword" placeholder="Palabra Clave">
+                    </div>`);
   });
 }
