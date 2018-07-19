@@ -12,7 +12,7 @@ recipeRoutes.get('/addRecipe', ensureLoggedIn("/auth/informs"), (req, res, next)
 
 
 recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) => {
-  const {name, elaborationTime, category, } = req.body;
+  const {name, elaborationTime, category } = req.body;
   const ingredients = [];
   const ingredient = req.body.ingredient;
   const quantity = req.body.quantity;
@@ -111,7 +111,6 @@ recipeRoutes.post("/search", (req,res,next)=>{
 });
 
 recipeRoutes.get("/delete/:id", (req,res,next)=>{
-  console.log("hola")
   Recipe.findByIdAndRemove(req.params.id)
     .then(()=>{
       res.redirect("/auth/profile")
@@ -120,10 +119,45 @@ recipeRoutes.get("/delete/:id", (req,res,next)=>{
       console.log(err);
     })
 })
+
 recipeRoutes.get("/edit/:id", (req,res,next)=>{
   Recipe.findById(req.params.id)
     .then((recipe)=>{
       res.render("recipes/editRecipe", {recipe})
     })
 })
+
+recipeRoutes.post("/edit/:id", uploadCloud.single("photo"), (req,res,next)=>{ 
+  const {name, elaborationTime, category, recipeBeers} = req.body;
+  const update = {name, elaborationTime, category, recipeBeers}
+  const steps = req.body.step;
+  if (typeof steps == Object){steps.filter((e)=>e!="");}
+  const keywords = req.body.keyword;
+  if (typeof keywords == Object){keywords.filter((e)=>e!="");}
+  const ingredients = req.body.ingredient;
+  if (typeof ingredients == Object){ingredients.filter((e)=>e!="")}
+  let newRecipe = {
+    name: name.toUpperCase(),
+    ingredients,
+    steps,
+    elaborationTime,
+    category,
+    keywords
+  }
+  if(req.file){
+    newRecipe.recipePic = {
+      path: req.file.secure_url,
+      originalName: req.file.original_name
+    };
+  }
+
+  Recipe.findByIdAndUpdate({_id:req.params.id}, newRecipe)
+    .then(()=>{
+      res.redirect("/auth/profile")
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+});
+
 module.exports = recipeRoutes;

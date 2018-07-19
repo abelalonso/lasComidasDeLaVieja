@@ -3,6 +3,7 @@ window.onload = function(){
   let counterStep = 1;
   let counterIngredient = 1;
   let counterKeyword = 1;
+  $("#cancel").hide();
 
   $('#addIngredient').click(function(ev) {
     ev.preventDefault();
@@ -67,4 +68,24 @@ window.onload = function(){
                       name="keyword" placeholder="Palabra Clave">
                     </div>`);
   });
+
+  $('#changePhoto').click(function(ev) {
+    ev.preventDefault();
+    $(this).before(`<form id="changePhotoForm" action="/auth/changePhoto" method="POST" enctype="multipart/form-data">
+    <input id="photo" name="photo" type="file" >
+    <button type="submit">Ok</button>
+    </form>`);
+    $(this).hide();
+    $("#cancel").show();
+  });
+
+  $("#cancel").click(function(ev) {
+    ev.preventDefault();
+    $(this).hide();
+    $("#changePhoto").show();
+    $("#changePhotoForm").remove();
+  });
+  
+
+
 }

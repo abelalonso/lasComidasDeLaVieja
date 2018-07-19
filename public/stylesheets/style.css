@@ -86,4 +86,14 @@ img {
 p {
   text-align: center; }
 
+/* .row{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .col-md-6{
+    display: flex;
+    flex-direction: row;
+  }
+} */
+
 /*# sourceMappingURL=style.css.map */

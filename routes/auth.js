@@ -88,4 +88,17 @@ authRoutes.get("/informs", (req, res) => {
   res.render("auth/informs");
 });
 
+authRoutes.post("/changePhoto", uploadCloud.single("photo"), (req, res) => {
+  if (req.file){
+      profilePic = {
+        path: req.file.secure_url,
+        originalName: req.file.original_filename
+      }
+    }
+    console.log(profilePic);
+    User.findByIdAndUpdate({_id:req.params.id}, {profilePic: profilePic})
+  
+  res.redirect("/auth/profile");
+});
+
 module.exports = authRoutes;
