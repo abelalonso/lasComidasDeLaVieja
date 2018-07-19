@@ -2,12 +2,17 @@
   width: 300px;
 }
 
-.img-beer{
-  width: 70px;
-}
-
-#beer{
+.beer{
   display: flex;
   flex-direction: column;
   align-items: center;
+  #img-party{
+    display: flex;
+    .img-beer{
+      width: 70px;
+    }
+    .img-vieja{
+      width: 200px;
+    }
+  }
 }
