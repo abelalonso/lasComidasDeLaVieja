@@ -102,7 +102,8 @@ recipeRoutes.post('/addComment/:id', (req, res, next) => {
 })
 
 recipeRoutes.post("/search", (req,res,next)=>{
-  Recipe.find({$or: [{keywords: [req.body.search]}, {name: new RegExp(req.body.search.toUpperCase())}]})
+  Recipe.find({$or: [{keywords: [req.body.search]}, 
+    {name: new RegExp(req.body.search.toUpperCase())}]})
     .then((recipes) => {
       res.render("index", {user:req.user, recipes})
     })
