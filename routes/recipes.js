@@ -35,7 +35,7 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
   const originalName = req.file.original_name;
   axios.get('https://api.punkapi.com/v2/beers/random')
   .then((beer) =>{
-    createRecipes(beer);
+    createRecipe(beer.data[0]);
   })
   .catch((err) =>{
     createRecipe();
@@ -43,6 +43,7 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
   })
 
   function createRecipe(beer){
+    console.log(beer)
     const recipeBeers = [];
     recipeBeers.push(beer);
     newRecipe = new Recipe({
@@ -59,14 +60,12 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
 
     newRecipe.save()
       .then(()=>{
-
         res.redirect("/auth/profile")
       })
       .catch((err)=>{
         console.log(err);
         res.render('recipes/newRecipe', {message: "something went wrong"})
       })
- 
   }
 });
 
@@ -100,10 +99,8 @@ recipeRoutes.post('/addComment/:id', (req, res, next) => {
 })
 
 recipeRoutes.post("/search", (req,res,next)=>{
-  console.log(req.body.search);
   Recipe.find({$or: [{keywords: [req.body.search]}, {name: new RegExp(req.body.search.toUpperCase())}]})
     .then((recipes) => {
-      console.log(recipes)
       res.render("index", {user:req.user, recipes})
     })
     .catch((err) => {
