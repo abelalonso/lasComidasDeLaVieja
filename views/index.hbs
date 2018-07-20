@@ -1,18 +1,20 @@
-<p>Bienvenido 
-    {{#if user}}
-        {{user.username}}
-    {{/if}}
-    {{#unless user}}
-        invitado, para acceder a cada receta, debes estar registrado...
-    {{/unless}}
-    </p>
-<div id="all-recipes" class="col-md-9">
-  <h2>Todas las recetas</h2>
-  <div id="recipes">
-      {{#each recipes}}
-      <div class="recipe-small">
-        <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
+<div class="container">
+    <h1 id="welcome">Bienvenido 
+        {{#if user}}
+            {{user.username}}
+        {{/if}}
+        {{#unless user}}
+            invitado, para acceder a cada receta, debes estar registrado...
+        {{/unless}}
+        </h1>
+    <div id="all-recipes" class="col-md-9">
+      <h2>Todas las recetas</h2>
+      <div id="recipes">
+          {{#each recipes}}
+          <div class="recipe-small">
+            <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
+          </div>
+          {{/each}}
       </div>
-      {{/each}}
-  </div>
+    </div>
 </div>

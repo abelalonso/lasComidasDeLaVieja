@@ -78,8 +78,8 @@ window.onload = function(){
   $('#changePhoto').click(function(ev) {
     ev.preventDefault();
     $(this).before(`<form id="changePhotoForm" action="/auth/changePhoto" method="POST" enctype="multipart/form-data">
-    <input id="photo" name="photo" type="file" >
-    <button type="submit">Ok</button>
+    <input class="btn btn-outline-light" id="photo" name="photo" type="file" >
+    <button class="btn btn-primary-light" type="submit">Ok</button>
     </form>`);
     $(this).hide();
     $("#cancel").show();

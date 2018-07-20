@@ -16,7 +16,7 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
   const ingredients = [];
   const reqIngredient = req.body.ingredient;
   const reqQuantity = req.body.quantity;
-  if (typeof reqIngredient == Object){
+  if (typeof reqIngredient == "object"){
 
     ingredient=reqIngredient.filter((e)=>e!="");
     quantity=reqQuantity.filter((e)=>e!="");
@@ -27,10 +27,11 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
     ingredients.push(reqQuantity+' '+reqIngredient);
   }
   const reqSteps = req.body.step;
-  if (typeof reqSteps == Object){steps=reqSteps.filter((e)=>e!="");}
+  if (typeof reqSteps == "object"){steps=reqSteps.filter((e)=>e!="");}
+  else{steps=reqSteps}
   const reqKeywords = req.body.keyword;
-  if (typeof reqKeywords == Object){keywords=reqKeywords.filter((e)=>e!="");}
-
+  if (typeof reqKeywords == "object"){keywords=reqKeywords.filter((e)=>e!="");}
+  else{keywords=reqKeywords}
   axios.get('https://api.punkapi.com/v2/beers/random')
   .then((beer) =>{
     createRecipe(beer.data[0]);
@@ -135,10 +136,13 @@ recipeRoutes.post("/edit/:id", uploadCloud.single("photo"), (req,res,next)=>{
   var steps=null;
   var keywords = null;
   if (typeof reqSteps == "object"){steps=reqSteps.filter((e)=>e!="");}
+  else{steps=reqSteps}
   const reqKeywords = req.body.keyword;
   if (typeof reqKeywords == "object"){keywords=reqKeywords.filter((e)=>e!="");}
+  else{keywords=reqKeywords}
   const reqIngredients = req.body.ingredient;
   if (typeof reqIngredients == "object"){ingredients=reqIngredients.filter(e=>e!="")}
+  else{ingredients=reqIngredients}
   let newRecipe = {
     name: name.toUpperCase(),
     ingredients,
