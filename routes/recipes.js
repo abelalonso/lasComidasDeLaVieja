@@ -21,10 +21,10 @@ recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) =>
     ingredient=reqIngredient.filter((e)=>e!="");
     quantity=reqQuantity.filter((e)=>e!="");
     for (let i=0; i<ingredient.length; i++){
-      ingredients.push(quantity[i]+' '+ingredient[i]);
+      ingredients.push(reqQuantity[i]+' '+reqIngredient[i]);
     }
   }else{
-    ingredients.push(quantity+' '+ingredient);
+    ingredients.push(reqQuantity+' '+reqIngredient);
   }
   const reqSteps = req.body.step;
   if (typeof reqSteps == Object){steps=reqSteps.filter((e)=>e!="");}
