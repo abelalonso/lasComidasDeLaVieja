@@ -2,10 +2,18 @@
   width: 300px;
 }
 
+#header{
+  display: flex;
+  justify-content: space-between
+}
+
 .beer{
   display: flex;
   flex-direction: column;
   align-items: center;
+  >*{
+    padding-top: 10px;
+  }
   #img-party{
     display: flex;
     .img-beer{
@@ -13,6 +21,40 @@
     }
     .img-vieja{
       width: 200px;
+    }
+  }
+}
+
+#message, #steps, #ingredient{
+  width: 80%
+}
+
+#ingredients{
+  padding: 20px 0;
+  li{
+    line-height: 1.5em;
+  }
+}
+
+#steps{
+  li{
+    line-height: 1.5em;
+    padding-bottom: 5px;
+    font-size: 1.2em;
+  }
+}
+#recipe-name{
+  width: 80%;
+  #author{
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.6em;
+    :first-child{
+      color: gray;
+    }
+    :last-child{
+      color: lightpink;
+      text-align: right;
     }
   }
 }

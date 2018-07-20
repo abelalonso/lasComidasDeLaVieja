@@ -14,8 +14,11 @@ window.onload = function(){
                       <input id="quantity${counterIngredient}" 
                             name="quantity"
                             type="text" 
+                            class="oneQuantity"
                             placeholder="Cantidad">
-                      <input id="ingredient${counterIngredient}" name="ingredient" type="text" placeholder="Ingrediente${counterIngredient++}">
+                      <input id="ingredient${counterIngredient}" name="ingredient" type="text" 
+                      class="oneIngredient"
+                      placeholder="Ingrediente ${++counterIngredient}">
                     </div>`);
     }
   });
@@ -28,6 +31,7 @@ window.onload = function(){
       $(this).before(`<div class='step'>
                         <textarea id="step${counterStep}" 
                         name="step"
+                        class="oneStep"
                         placeholder="Paso ${++counterStep}" rows="5"></textarea>
                       </div>`);
     }
@@ -40,7 +44,9 @@ window.onload = function(){
 
       $(this).before(`<div class='keyword'>
                         <input id="keyword${counterKeyword++}" 
-                        name="keyword" placeholder="Palabra Clave">
+                        name="keyword" 
+                        class="oneKeyword"
+                        placeholder="Palabra Clave">
                       </div>`);
     }
   });

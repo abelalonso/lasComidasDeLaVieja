@@ -5,26 +5,32 @@
             <div id="profile-pic">
                 <img src="{{user.profilePic.path}}" alt="{{user.profilePic.originalName}}">
             </div>
-            <button id="changePhoto">Cambiar foto</button>
-             <button id="cancel">Cancelar</button>
-            <a href="/recipes/addRecipe">Crear receta</a>
-            <a href="/">Mostrar todas las recetas</a>
+            <button class="btn btn-outline-warning" id="changePhoto">Cambiar foto</button>
+            <button id="cancel">Cancelar</button>
+            <a href="/recipes/addRecipe">
+                <button class="btn btn-outline-success">Crear receta</button>
+            </a>
+            <a href="/">
+                <button class="btn btn-outline-info">Mostrar todas las recetas</button>
+            </a>
         </div>
         <div id="all-recipes" class="col-md-9">
             <h2>Todas mis recetas</h2>
             <div id="recipes">
                 {{#each recipes}}
-                    <div class="recipe-small">
-                        <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
-                        
-                      <a href="/recipes/delete/{{this._id}}">
-                      <button>Borrar</button>
-                      </a>
-                      <a href="/recipes/edit/{{this._id}}">
-                          <button>Editar</button>
-                          </a>
+                <div class="recipe-small">
+                    <a href="/recipes/oneRecipe/{{this._id}}">{{> recipePartial this}}</a>
+
+                    <div class="buttons">
+                        <a href="/recipes/delete/{{this._id}}">
+                            <button class="btn btn-outline-danger">Borrar</button>
+                        </a>
+                        <a href="/recipes/edit/{{this._id}}">
+                            <button class="btn btn-outline-warning">Editar</button>
+                        </a>
                     </div>
-                {{/each}} 
+                </div>
+                {{/each}}
             </div>
         </div>
     </div>

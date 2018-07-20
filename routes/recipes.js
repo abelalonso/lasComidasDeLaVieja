@@ -14,22 +14,22 @@ recipeRoutes.get('/addRecipe', ensureLoggedIn("/auth/informs"), (req, res, next)
 recipeRoutes.post('/addRecipe', uploadCloud.single('photo'), (req, res, next) => {
   const {name, elaborationTime, category } = req.body;
   const ingredients = [];
-  const ingredient = req.body.ingredient;
-  const quantity = req.body.quantity;
-  if (typeof ingredient == Object){
+  const reqIngredient = req.body.ingredient;
+  const reqQuantity = req.body.quantity;
+  if (typeof reqIngredient == Object){
 
-    ingredient.filter((e)=>e!="");
-    quantity.filter((e)=>e!="");
+    ingredient=reqIngredient.filter((e)=>e!="");
+    quantity=reqQuantity.filter((e)=>e!="");
     for (let i=0; i<ingredient.length; i++){
       ingredients.push(quantity[i]+' '+ingredient[i]);
     }
   }else{
     ingredients.push(quantity+' '+ingredient);
   }
-  const steps = req.body.step;
-  if (typeof steps == Object){steps.filter((e)=>e!="");}
-  const keywords = req.body.keyword;
-  if (typeof keywords == Object){keywords.filter((e)=>e!="");}
+  const reqSteps = req.body.step;
+  if (typeof reqSteps == Object){steps=reqSteps.filter((e)=>e!="");}
+  const reqKeywords = req.body.keyword;
+  if (typeof reqKeywords == Object){keywords=reqKeywords.filter((e)=>e!="");}
 
   axios.get('https://api.punkapi.com/v2/beers/random')
   .then((beer) =>{
@@ -130,12 +130,15 @@ recipeRoutes.get("/edit/:id", (req,res,next)=>{
 recipeRoutes.post("/edit/:id", uploadCloud.single("photo"), (req,res,next)=>{ 
   const {name, elaborationTime, category, recipeBeers} = req.body;
   const update = {name, elaborationTime, category, recipeBeers}
-  const steps = req.body.step;
-  if (typeof steps == Object){steps.filter((e)=>e!="");}
-  const keywords = req.body.keyword;
-  if (typeof keywords == Object){keywords.filter((e)=>e!="");}
-  const ingredients = req.body.ingredient;
-  if (typeof ingredients == Object){ingredients.filter((e)=>e!="")}
+  const reqSteps = req.body.step;
+  var ingredients=null;
+  var steps=null;
+  var keywords = null;
+  if (typeof reqSteps == "object"){steps=reqSteps.filter((e)=>e!="");}
+  const reqKeywords = req.body.keyword;
+  if (typeof reqKeywords == "object"){keywords=reqKeywords.filter((e)=>e!="");}
+  const reqIngredients = req.body.ingredient;
+  if (typeof reqIngredients == "object"){ingredients=reqIngredients.filter(e=>e!="")}
   let newRecipe = {
     name: name.toUpperCase(),
     ingredients,

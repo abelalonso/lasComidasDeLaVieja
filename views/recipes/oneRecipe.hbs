@@ -25,7 +25,10 @@
       {{/if}}
     </div>
     <div class="col-md-8">
-      <h1>{{recipe.name}} <span>por {{recipe.authorId.username}}</span></h1>
+      <div id="recipe-name">
+        <h1>{{recipe.name}} 
+        <div id="author"><span>{{recipe.elaborationTime}}</span><span>-por {{recipe.authorId.username}}-</span></div></h1>
+      </div>
       <div id="steps">
         <h3>Pasos a seguir</h3>
         <ol>
@@ -40,8 +43,8 @@
           {{> commentsPartial this}}
         {{/each}}
         <form action="/recipes/addComment/{{recipe._id}}" method="post">
-          <textarea name="message" rows="4" placeholder="Deja tu comentario"></textarea>
-          <button type="submit">Comentar</button>
+          <textarea id="message" name="message" rows="4" placeholder="Deja tu comentario"></textarea>
+          <button class="btn btn-outline-info" type="submit">Comentar</button>
         </form>
       </div>
     </div>

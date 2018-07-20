@@ -96,7 +96,13 @@ authRoutes.post("/changePhoto", uploadCloud.single("photo"), (req, res) => {
       }
     }
     console.log(profilePic);
-    User.findByIdAndUpdate({_id:req.params.id}, {profilePic: profilePic})
+    User.findByIdAndUpdate({_id:req.user._id}, {profilePic: profilePic})
+      .then(()=>{
+        console.log("ok")
+      })
+      .catch((err)=>{
+        console.log("error", err)
+      })
   
   res.redirect("/auth/profile");
 });

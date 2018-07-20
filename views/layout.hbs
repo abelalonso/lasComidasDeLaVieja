@@ -27,17 +27,17 @@
     </div>
     <ul>
       {{#if user}}
-        <li><a href="/auth/profile">Mi página</a></li>
-        <li><a href="/auth/logout">Salir</a></li>
+        <li><a href="/auth/profile"><button class="btn btn-outline-primary">Mi página</button></a></li>
+        <li><a href="/auth/logout"><button class="btn btn-outline-danger">Salir</button></a></li>
       {{/if}}
       {{#unless user}}
-        <li><a href="/auth/login">Iniciar sesión</a></li>
-        <li><a href="/auth/signup">Registrarse</a></li>
+        <li><a href="/auth/login"><button class="btn btn-outline-primary">Iniciar sesión</button></a></li>
+        <li><a href="/auth/signup"><button class="btn btn-outline-warning">Registrarse</button></a></li>
         {{#if recipes}}
         <li>
           <form action="/recipes/search" method="post">
             <input type="text" name="search" placeholder="Buscar receta">
-            <button type="submit">Buscar</button>
+            <button class="btn btn-outline-primary" type="submit">Buscar</button>
           </form>
         </li>
         {{/if}}

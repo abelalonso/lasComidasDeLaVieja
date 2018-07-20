@@ -12,10 +12,16 @@
 .recipe-big-photo {
   width: 300px; }
 
+#header {
+  display: flex;
+  justify-content: space-between; }
+
 .beer {
   display: flex;
   flex-direction: column;
   align-items: center; }
+  .beer > * {
+    padding-top: 10px; }
   .beer #img-party {
     display: flex; }
     .beer #img-party .img-beer {
@@ -23,11 +29,39 @@
     .beer #img-party .img-vieja {
       width: 200px; }
 
+#message, #steps, #ingredient {
+  width: 80%; }
+
+#ingredients {
+  padding: 20px 0; }
+  #ingredients li {
+    line-height: 1.5em; }
+
+#steps li {
+  line-height: 1.5em;
+  padding-bottom: 5px;
+  font-size: 1.2em; }
+
+#recipe-name {
+  width: 80%; }
+  #recipe-name #author {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.6em; }
+    #recipe-name #author :first-child {
+      color: gray; }
+    #recipe-name #author :last-child {
+      color: lightpink;
+      text-align: right; }
+
 #profile-section {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center; }
+  #profile-section button {
+    width: 200px;
+    margin-top: 10px; }
   #profile-section #profile-pic {
     width: 200px;
     height: 200px; }
@@ -40,15 +74,27 @@
 #all-recipes #recipes {
   display: flex;
   flex-wrap: nowrap; }
-  #all-recipes #recipes a {
-    text-decoration: none; }
-    #all-recipes #recipes a .recipe-photo {
-      width: 150px; }
-    #all-recipes #recipes a .recipe {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 15px; }
+  #all-recipes #recipes .recipe-small {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; }
+    #all-recipes #recipes .recipe-small a {
+      text-decoration: none;
+      text-align: center; }
+      #all-recipes #recipes .recipe-small a .recipe-photo {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto; }
+        #all-recipes #recipes .recipe-small a .recipe-photo img {
+          height: 100%; }
+      #all-recipes #recipes .recipe-small a .recipe {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px; }
+    #all-recipes #recipes .recipe-small .buttons {
+      display: flex; }
   #all-recipes #recipes h3 {
     font-size: 1.2em; }
 
@@ -72,7 +118,10 @@ img {
   .navbar #title {
     margin-top: -50px; }
   .navbar li {
-    padding-right: 20px; }
+    list-style: none;
+    padding-bottom: 10px; }
+    .navbar li button {
+      width: 120px; }
 
 #text-no {
   padding-top: 80px; }
@@ -86,14 +135,36 @@ img {
 p {
   text-align: center; }
 
-/* .row{
+#create {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  .col-md-6{
-    display: flex;
-    flex-direction: row;
-  }
-} */
+  align-items: center; }
+  #create > * {
+    margin-bottom: 20px; }
+  #create .recipe-name, #create #photo {
+    width: 80%; }
+    #create .recipe-name #name, #create #photo #name {
+      width: 100%; }
+  #create .row {
+    width: 80%; }
+    #create .row input {
+      width: 100%; }
+    #create .row .col-md-6 > * {
+      padding-bottom: 10px; }
+    #create .row .ingredient {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; }
+      #create .row .ingredient .oneQuantity {
+        width: 20%; }
+      #create .row .ingredient .oneIngredient {
+        width: 78%; }
+    #create .row .keyword {
+      display: flex;
+      flex-direction: row; }
+      #create .row .keyword .oneKeyword {
+        width: 100px; }
+    #create .row .oneStep {
+      width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

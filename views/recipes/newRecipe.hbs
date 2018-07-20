@@ -1,57 +1,59 @@
 <div class="container">
   <form action="/recipes/addRecipe" method="POST" enctype="multipart/form-data">
-    <div class="row">
+    <div id="create">
       <div class="recipe-name">
-        <h2 for="name">Introduce el nombre de la receta</h2>
-        <input name="name" placeholder="Introduce el nombre de la receta">
+        <h2 for="name">Nombre de la receta</h2>
+        <input id="name" name="name" placeholder="Introduce el nombre de la receta">
       </div>
       <div id="photo">
         <h2>Foto de la receta</h2>
-        <input type="file" name="photo">
+        <input class="btn btn-outline-light" type="file" name="photo">
       </div>
-      <div class="col-md-6">
-        <div class="recipe-time">
-          <h2 for="elaborationTime">Tiempo de elaboración</h2>
-          <input name="elaborationTime" placeholder="Tiempo de elaboración">
-        </div>
-        <div id="ingredients">
-          <h2 for="ingredients">Ingredientes</h2>
-          <div class="ingredient">
-            <input id="quantity" name="quantity" type="text" placeholder="Cantidad">
-            <input id="ingredient" name="ingredient" type="text" placeholder="Ingrediente">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="recipe-time">
+            <h2 for="elaborationTime">Tiempo de elaboración</h2>
+            <input name="elaborationTime" placeholder="Tiempo de elaboración">
           </div>
-          <button id="addIngredient">Add</button>
+          <div id="ingredients">
+            <h2 for="ingredients">Ingredientes</h2>
+            <div class="ingredient">
+              <input class="oneQuantity" id="quantity0" name="quantity" type="text" placeholder="Cantidad">
+              <input id="ingredient0" class="oneIngredient" name="ingredient" type="text" placeholder="Ingrediente 1">
+            </div>
+            <button class="btn btn-outline-success" id="addIngredient">Add</button>
+          </div>
+        </div>
+  
+  
+        <div class="col-md-6">
+          <div id="category">
+            <h2>Categoría</h2>
+            <select class="btn btn-outline-primary" name="category">
+              <option>Entrante</option>
+              <option>Primero</option>
+              <option>Principal</option>
+              <option>Postre</option>
+              <option>Bebida</option>
+            </select>
+          </div>
+          <div id="keywords">
+            <h2>Palabras clave</h2>
+            <div class="keyword">
+              <input id="keyword0" name="keyword" class="oneKeyword"type="text" placeholder="Palabra clave">
+            </div>
+            <button class="btn btn-outline-success" id="addKeyword">Add</button>
+          </div>
+          <div id="steps">
+            <h2>Pasos</h2>
+            <div class="step">
+              <textarea id="step0" class="oneStep" name="step" placeholder="Paso 1" rows="5"></textarea>
+            </div>
+            <button class="btn btn-outline-success"id="addStep">Add</button>
+          </div>
         </div>
       </div>
-
-
-      <div class="col-md-6">
-        <div id="category">
-          <h2>Categoría</h2>
-          <select name="category">
-            <option>Entrante</option>
-            <option>Primero</option>
-            <option>Principal</option>
-            <option>Postre</option>
-            <option>Bebida</option>
-          </select>
-        </div>
-        <div id="keywords">
-          <h2>Palabras clave</h2>
-          <div class="keyword">
-            <input id="keyword" name="keyword" type="text" placeholder="Palabra clave">
-          </div>
-          <button id="addKeyword">Add</button>
-        </div>
-        <div id="steps">
-          <h2>Pasos</h2>
-          <div class="step">
-            <textarea id="step" name="step" placeholder="Paso 1" rows="5"></textarea>
-          </div>
-          <button id="addStep">Add</button>
-        </div>
-      </div>
-    <button type="submit">Enviar</button>
+    <button class="btn btn-outline-primary" type="submit">Enviar</button>
     </div>
 
 
