@@ -22,7 +22,7 @@
 #all-recipes {
   #recipes {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     .recipe-small{
       display: flex;
       flex-direction: column;

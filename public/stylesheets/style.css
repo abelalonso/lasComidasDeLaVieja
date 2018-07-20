@@ -73,7 +73,7 @@
 
 #all-recipes #recipes {
   display: flex;
-  flex-wrap: nowrap; }
+  flex-wrap: wrap; }
   #all-recipes #recipes .recipe-small {
     display: flex;
     flex-direction: column;
@@ -128,9 +128,13 @@ img {
 
 #recipes {
   display: flex;
-  flex-wrap: nowrap; }
+  flex-wrap: wrap; }
   #recipes .recipe-small {
     padding: 15px; }
+    #recipes .recipe-small .recipe-photo {
+      width: 200px; }
+      #recipes .recipe-small .recipe-photo h3 {
+        width: 100px; }
 
 #welcome {
   text-align: center; }

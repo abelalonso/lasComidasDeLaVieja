@@ -1,8 +1,11 @@
 #recipes{
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   .recipe-small{
     padding: 15px;
+    .recipe-photo{
+      width: 200px;
+    }
   }
 }
 #welcome{
